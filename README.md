@@ -32,4 +32,4 @@ It won't run every single `script` out there, but it does have the same method a
 
 It would be really cool if you credited me if you used this source <3!
 
-If you really liked this source please CashApp me at $speedstarskiwi
+If you really liked this source it would be nice to `CashApp` me at `$speedstarskiwi`!
