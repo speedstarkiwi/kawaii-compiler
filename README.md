@@ -14,7 +14,7 @@ In the `execution`, it will first compile up the `script` into a hex-like code c
 
 We only decided to use less then 10 `addresses` and only 2 `offsets` which can be easily found. In order to find the `lua_state_top` or `lua_state_base` type in your engine `"Argument 3"` and click the first reference. It should be a `gettop` type function.
 
-The addresses do not really have a specific string but you can always find some addys at https://github.com/speedstarkiwi/addy-tutorial/blob/main/addys.c
+The addresses do not really have a specific explantion but you can always find some addys at https://github.com/speedstarkiwi/addy-tutorial/blob/main/addys.c
 
 # what scripts can this run?
 
@@ -27,3 +27,9 @@ It won't run every single `script` out there, but it does have the same method a
 `istaintedbypass` https://github.com/gogo9211/IsTained-Bypass-for-Roblox
 
 `callcheck` https://github.com/yesitskiko/Callcheck-Bypass
+
+`compiler` https://github.com/roblox/luau/
+
+It would be really cool if you credited me if you used this source <3!
+
+If you really liked this source please CashApp me at $speedstarskiwi
