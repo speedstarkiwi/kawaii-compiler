@@ -30,6 +30,8 @@ It won't run every single `script` out there, but it does have the same method a
 
 `compiler` https://github.com/roblox/luau/
 
+`compression` https://github.com/NezyDev/
+
 It would be really cool if you credited me if you used this source <3!
 
 If you really liked this source it would be nice to `CashApp` me at `$speedstarskiwi`!
