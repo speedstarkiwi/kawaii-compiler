@@ -20,6 +20,16 @@ The addresses do not really have a specific explantion but you can always find s
 
 It won't run every single `script` out there, but it does have the same method as roblox to run scripts, but it can run `Infinite Yield, Dex Explorer, Obfuscated Scripts` and more. It has the possibility to run `Owl Hub` and `Dark Hub` if modded properly.
 
+# does it use lua C?
+
+Remember that each exploit uses `luac`, which are basic functions like `getfield, pushnil, pcall`. They don't require `luac` for basic exploits, but using it for functions, custom lua environment registeration, or others is required.
+
+The `Lua C` api that is embedded with the `dll` can easily be updated if structs, addresses, or offsets are updated properly. It is not required, unless you want an actual good exploit which this source is not made to do.
+
+# how to embed lua C?
+
+no
+
 # credits
 
 `scheduler` http://github.com/fish-Sticks/headhunter/
