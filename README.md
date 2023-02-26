@@ -28,7 +28,7 @@ The `Lua C` api that is embedded with the `dll` can easily be updated if structs
 
 # how to embed lua C?
 
-no
+They either can be rewritten in standard by using `__inline` and the lua structs, or you can simply just use the `VM` to call them.
 
 # credits
 
