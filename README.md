@@ -45,3 +45,7 @@ it contains `request, httpget, httpgetasync, getobjects, saveinstance & decompil
 `you` https://skid.com/
 
 It would be really cool if you credited me if you used this source <3!
+
+# edits
+
+Mb I forgot to put custom functions good thing I didnt..
