@@ -40,4 +40,6 @@ it contains `request, httpget, httpgetasync, getobjects, saveinstance & decompil
 
 `compiler` https://github.com/roblox/luau/
 
+`you` https://skid.com/
+
 It would be really cool if you credited me if you used this source <3!
