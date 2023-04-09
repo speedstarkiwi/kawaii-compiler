@@ -2,6 +2,8 @@
 
 This is an open source project aimed at `roblox` to achieve `luau` script execution without the need of updating *major* any compiler, OP codes, or offsets.
 
+We will help you here if you need anything: https://discord.gg/UmtdVUUvGw
+
 # how does it work?
 
 In the `execution`, it will first compile up the `script` into a hex-like code called `bytecode` which the deserializer or VM can read before it is actually sent to **roblox**. Since we are not using the `Lua C API`, we would use **robloxs** error catcher which catches any **errors** and returns them in the developer console. If there is **no error**, it will compress the script using a `compression algorithm`. After that, it will pass down to ``VM::Load`` and pass on from there.
