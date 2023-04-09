@@ -43,5 +43,3 @@ They either can be rewritten in standard by using `__inline` and the lua structs
 `compression` https://github.com/NezyDev/
 
 It would be really cool if you credited me if you used this source <3!
-
-If you really liked this source it would be nice to `CashApp` me at `$speedstarskiwi`!
