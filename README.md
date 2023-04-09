@@ -1,6 +1,6 @@
 # kawaii-compiler
 
-This is an open source project aimed at `roblox` to achieve `luau` script execution without the need of updating any compiler, OP codes, or offsets.
+This is an open source project aimed at `roblox` to achieve `luau` script execution without the need of updating *major* any compiler, OP codes, or offsets.
 
 # how does it work?
 
@@ -29,6 +29,10 @@ The `Lua C` api that is embedded with the `dll` can easily be updated if structs
 # how to embed lua C?
 
 They either can be rewritten in standard by using `__inline` and the lua structs, or you can simply just use the `VM` to call them.
+
+# what functions does it have?
+
+it contains `request, httpget, httpgetasync, getobjects, saveinstance & decompile`.
 
 # credits
 
