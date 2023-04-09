@@ -32,14 +32,8 @@ They either can be rewritten in standard by using `__inline` and the lua structs
 
 # credits
 
-`scheduler` http://github.com/fish-Sticks/headhunter/
-
-`istaintedbypass` https://github.com/gogo9211/IsTained-Bypass-for-Roblox
-
-`callcheck` https://github.com/yesitskiko/Callcheck-Bypass
+`scheduler` http://github.com/NezyDev/
 
 `compiler` https://github.com/roblox/luau/
-
-`compression` https://github.com/NezyDev/
 
 It would be really cool if you credited me if you used this source <3!
