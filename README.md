@@ -46,6 +46,15 @@ it contains `request, httpget, httpgetasync, getobjects, saveinstance & decompil
 
 It would be really cool if you credited me if you used this source <3!
 
-# edits
+# important!
 
-Mb I forgot to put custom functions good thing I didnt..
+make sure you compile in release x86 otherwise you will get `pch` errors!
+![image](https://user-images.githubusercontent.com/121459772/230804253-d1680155-0e14-4aa9-a591-226ff1d69bb2.png)
+
+if you get this `zstd.h` not found error, that looks like this!
+![image](https://user-images.githubusercontent.com/121459772/230804269-e79a394d-2b2f-4ae6-9a90-db46c14b80bd.png)
+paste this include code on top of the `dllmain.cpp`
+```
+#include "zstd/include/zstd.h"
+```
+
