@@ -50,7 +50,7 @@ void load() {
     std::thread(pipe).detach();//make a new thread as in the load function
     std::cout << "pipe thread now done!" << std::endl;
 
-    rbx_print(3, "kawaii compiler - dont skid");
+    rbx_print(3, "kawaii compiler - full skid and shit code free");
 }
 
 BOOL APIENTRY DllMain(HMODULE hModule, DWORD ul_reason_for_call, LPVOID lpReserved)
