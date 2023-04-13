@@ -25,11 +25,11 @@ uintptr_t luastate(uintptr_t sc)//get the lua state from script context
     return result;
 }
 
-uintptr_t getscheduler_address = 0xB2D460;
-uintptr_t vmload_address = 0x7561B0;
-uintptr_t taskdefer_address = 0x7D0ED0;
-uintptr_t print_address = 0x10E4910;
-uintptr_t nilobject_address = aslr(0x2950220);
+uintptr_t getscheduler_address = 0x726840;
+uintptr_t vmload_address = 0x34ABB0;
+uintptr_t taskdefer_address = 0x3D1470;
+uintptr_t print_address = 0xCE1C00;
+uintptr_t nilobject_address = aslr(0x2553EB0);
 
 using getscheduler_rbx = std::uintptr_t(__cdecl*)();
 getscheduler_rbx rbx_getscheduler = reinterpret_cast<getscheduler_rbx>(aslr(getscheduler_address));
