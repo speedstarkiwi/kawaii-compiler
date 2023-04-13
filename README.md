@@ -32,10 +32,6 @@ The `Lua C` api that is embedded with the `dll` can easily be updated if structs
 
 They either can be rewritten in standard by using `__inline` and the lua structs, or you can simply just use the `VM` to call them.
 
-# what functions does it have?
-
-it contains `request, httpget, httpgetasync, getobjects, saveinstance & decompile`.
-
 # credits
 
 `scheduler` http://github.com/NezyDev/
@@ -44,7 +40,7 @@ it contains `request, httpget, httpgetasync, getobjects, saveinstance & decompil
 
 `you` https://skid.com/
 
-It would be really cool if you credited me if you used this source <3!
+It would be really cool if you credited me if you used this source <3! (u prob wont skid)
 
 # important!
 
@@ -58,3 +54,6 @@ paste this include code on top of the `dllmain.cpp`
 #include "zstd/include/zstd.h"
 ```
 
+# important(again)!
+
+stop asking us for addresses. if we dont want to provide, we **wont**. simply look up address tutorials.
