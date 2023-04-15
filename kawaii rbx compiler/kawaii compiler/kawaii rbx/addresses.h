@@ -3,7 +3,7 @@
 #include <Windows.h>
 #include <string>
 
-//update EVERYTHING
+//its updated 
 
 uintptr_t aslr(uintptr_t address) {//aslr the address so you dont need to do it manually
     uintptr_t baseAddress = reinterpret_cast<uintptr_t>(GetModuleHandleA(nullptr));
@@ -13,23 +13,19 @@ uintptr_t aslr(uintptr_t address) {//aslr the address so you dont need to do it 
 uintptr_t rl;//-> passed down so we can retrieve lua state
 lua_State* l;//-> lua state for other purposes you will see in execution.h
 
-int top = 24, base = 20;
+int top = 20, base = 28;
 int id1 = 72, id2 = 24;
 
 uintptr_t luastate(uintptr_t sc)//get the lua state from script context
 {
-    uintptr_t offset = 244;
-    uintptr_t address = sc + offset;
-    DWORD* dwordPtr = (DWORD*)address;
-    uintptr_t result = *dwordPtr - address;
-    return result;
+    return (sc + 244) ^ *(DWORD*)(sc + 244);
 }
 
-uintptr_t getscheduler_address = 0xB2D460;
-uintptr_t vmload_address = 0x7561B0;
-uintptr_t taskdefer_address = 0x7D0ED0;
-uintptr_t print_address = 0x10E4910;
-uintptr_t nilobject_address = aslr(0x2950220);
+uintptr_t getscheduler_address = 0xB26840;
+uintptr_t vmload_address = 0x74ABB0;
+uintptr_t taskdefer_address = 0x7D1470;
+uintptr_t print_address = 0x10E1C00;
+uintptr_t nilobject_address = aslr(0x2953EB0);
 
 using getscheduler_rbx = std::uintptr_t(__cdecl*)();
 getscheduler_rbx rbx_getscheduler = reinterpret_cast<getscheduler_rbx>(aslr(getscheduler_address));
