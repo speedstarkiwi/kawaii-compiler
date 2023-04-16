@@ -61,7 +61,7 @@ void run_script(uintptr_t rl, lua_State* l, std::string source) {//i was regrett
     //decided to use the actual compile itself to return errors
     char* error_only = luau_compile(source.c_str(), strlen(source.c_str()), NULL, &bytecodeSize);
 
-    register_function_fake(rl, source, "game:HttpGet", "HttpGet");//real httpget
+    (void)register_function_fake(rl, source, "game:HttpGet", "HttpGet");//real httpget
     register_function_fake(rl, source, "game:HttpGetAsync", "HttpGet");//also real httpgetasync
 
     if (luau_load(l, name, error_only, bytecodeSize, 0))//now check if error exist
@@ -69,6 +69,11 @@ void run_script(uintptr_t rl, lua_State* l, std::string source) {//i was regrett
         const char* error_message = lua_tostring(l, -1);
         rbx_print(3, error_message);//SKID its time for you to write this yourself
         lua_pop(l, 1);//remove it
+
+        const std::uintptr_t top_ptr = rl + top;
+        const std::uintptr_t topp = *reinterpret_cast<std::uintptr_t*>(top_ptr);
+        *reinterpret_cast<std::uintptr_t*>(topp) = LUA_TNIL;
+        *reinterpret_cast<std::uintptr_t*>(top_ptr) += sizeof(std::uintptr_t);
     }
     else
     {
@@ -84,44 +89,7 @@ void run_script(uintptr_t rl, lua_State* l, std::string source) {//i was regrett
     name = "kawaii luau";
 }
 
-bool load_bytecode(lua_State* l, std::string bytecode) {//external load bytecode option that returns an error
-
-    //compile and get result from the luau_load function
-    int result = luau_load(l, "kawaii luau", (char*)bytecode.data(), bytecode.size(), NULL);
-
-    if (result != LUA_OK) {//if its not OK then view the error
-        std::cout << lua_tostring(l, -1) << std::endl;//assuming your using console
-        lua_pop(l, 1);
-        return false;
-    }
-
-    return true;
-}
-
-void run_script_error_handler(uintptr_t rl, lua_State* l, std::string code) {//load bytecode but with error handler
-    std::string lua_code = code;
-
-    //first grab the script or compile it
-    bytecode_encoder_t encoder;
-    std::string bytecode = Luau::compile(lua_code, {}, {}, &encoder);
-    std::string compressed_bytecode = compress_source(bytecode);
-
-    const char* chunk_name = "kawaii luau";
-    //now run it into luau_load so it can check for errors
-    int result = luau_load(l, chunk_name, compressed_bytecode.c_str(), compressed_bytecode.size(), 0);
-
-    if (result == LUA_OK) {//assume it works
-        int status = lua_pcall(l, 0, LUA_MULTRET, 0);
-        //run the script and does final touchings
-        if (status != LUA_OK) {
-            std::cerr << "execution error:  " << lua_tostring(l, -1) << std::endl;
-        }
-    }
-    else {
-        std::cerr << "compile error: " << lua_tostring(l, -1) << std::endl;
-    }
-
-}
+//4/16: deleted usesless shit :)
 
 namespace functions {//TODO: add more bcuz this aint even gon give 5% script support
 
