@@ -3,8 +3,6 @@
 #include <Windows.h>
 #include <string>
 
-//its updated 
-
 uintptr_t aslr(uintptr_t address) {//aslr the address so you dont need to do it manually
     uintptr_t baseAddress = reinterpret_cast<uintptr_t>(GetModuleHandleA(nullptr));
     return address - 0x400000 + baseAddress;
@@ -13,22 +11,28 @@ uintptr_t aslr(uintptr_t address) {//aslr the address so you dont need to do it 
 uintptr_t rl;//-> passed down so we can retrieve lua state
 lua_State* l;//-> lua state for other purposes you will see in execution.h
 
-int top = 20, base = 28;
+int top = 12, base = 24;
 int id1 = 72, id2 = 24;
 
-uintptr_t luastate(uintptr_t sc)//get the lua state from script context
+//dont need to update btw**
+uintptr_t luastate(uintptr_t sc)//please note: if you cant update ig use getstate but case default:
 {
-    return (sc + 244) ^ *(DWORD*)(sc + 244);
+    return (sc + 244)  ^ *(DWORD*)(sc + 244);
 }
 
-uintptr_t getscheduler_address = 0xB26840;
-uintptr_t vmload_address = 0x74ABB0;
-uintptr_t taskdefer_address = 0x7D1470;
-uintptr_t print_address = 0x10E1C00;
-uintptr_t nilobject_address = aslr(0x2953EB0);
+uintptr_t getscheduler_address = 0xB320B0;//updated for 4/19
+uintptr_t vmload_address = 0x756B40;//updated for 4/19
+uintptr_t taskdefer_address = 0x7DC560;//updated for 4/19
+uintptr_t print_address = 0x10EE9C0;//updated for 4/19
+uintptr_t nilobject_address = aslr(0x000000);//not updated
+uintptr_t performinit_address = 0xB49A20;//not updated
+uintptr_t getstate_address = 0x79DAC0;//updated for 4/19
 
 using getscheduler_rbx = std::uintptr_t(__cdecl*)();
 getscheduler_rbx rbx_getscheduler = reinterpret_cast<getscheduler_rbx>(aslr(getscheduler_address));
+
+using getstate_rbx = std::uintptr_t(__thiscall*)(std::uintptr_t rl, int* nigger);
+getstate_rbx rbx_getstate = reinterpret_cast<getstate_rbx>(aslr(getstate_address));
 
 using luavmload_rbx = std::uintptr_t(__fastcall*)(std::uintptr_t rl, std::string* source, const char* chunk, int env);
 luavmload_rbx rbx_luavmload = reinterpret_cast<luavmload_rbx>(aslr(vmload_address));
@@ -39,76 +43,13 @@ taskdefer_rbx rbx_taskdefer = reinterpret_cast<taskdefer_rbx>(aslr(taskdefer_add
 using print_rbx = uintptr_t(__cdecl*)(int rl, const char* source);
 print_rbx rbx_print = reinterpret_cast<print_rbx>(aslr(print_address));
 
-const char* rbx_typename(int rl, int type)//rewritten typename with types
-{
-    const char* result = "no value";
-    if (type != LUA_TNONE)
-        result = (const char*)*((DWORD*)&nilobject_address + type);//whatever type user gives
-    return result;//bool string should pop up like taht or smth 
+using perinit_rbx = uintptr_t(__thiscall*)(const char* nigggerrr);
+perinit_rbx rbx_performinit = reinterpret_cast<perinit_rbx>(aslr(performinit_address));
+
+
+std::uintptr_t api_incr_top(std::uintptr_t a1) {//increments the lua
+    std::uintptr_t* ptr = reinterpret_cast<std::uintptr_t*>(a1 + top);
+    *ptr += sizeof(std::uintptr_t);
+    return *ptr;
 }
-
-int rbx_getstate(int script_context, int* state_type) {//rewritten getstate function also alternative of directly using the lua state
-    int context;
-
-    switch (*state_type) {//should always call state_type = none of the cases below
-    case 3:
-    case 6:
-    case 7:
-    case 8:
-    case 9:
-        context = *(int*)(script_context + 396) - (script_context + 396);
-        break;
-    default://this is what the scheduler does.. use it default no cases.
-        context = *(int*)(script_context + 244) - (script_context + 244);
-        break;
-    }
-
-    return context;
-}
-
-
-void* rbx_pseudo2addr(DWORD* a1, int a2)//rewritten pseudo2addr for without casing index2addr
-{
-    //for skids that dont know what this is let me explain
-    //if index2addrs index doesnt match the index cases, its getting passed onto pseudo2 with the index
-    int v2; void* result; int v4; DWORD* v5; char* v6; int v7; DWORD* v8; char* v9;//keep in 1 line
-
-    switch (a2)//switch the index type
-    {
-    case LUA_GLOBALSINDEX:
-        v8 = a1 + 2;
-        v9 = (char*)v8 - *v8;
-        *((DWORD*)v9 + 384) = a1[14];
-        *((DWORD*)v9 + 387) = 8;
-        result = (char*)v8 - *v8 + 1536;
-        break;
-
-    case LUA_ENVIRONINDEX:
-        v4 = a1[4];
-        v5 = a1 + 2;
-        v6 = (char*)v5 - *v5;
-        if (v4 == a1[9])
-            v7 = a1[14];
-        else
-            v7 = *(DWORD*)(**(DWORD**)(v4 + 12) + 12);
-        *((DWORD*)v6 + 384) = v7;
-        *((DWORD*)v6 + 387) = 8;
-        result = (char*)v5 - *v5 + 1536;
-        break;
-
-    case LUA_REGISTRYINDEX:
-        result = (char*)a1 - a1[2] + 1560;
-        break;
-
-    default://none of them match up
-        v2 = **(DWORD**)(a1[4] + 12);
-        if (LUA_GLOBALSINDEX - a2 > *(unsigned char*)(v2 + 4))
-            result = &nilobject_address;//MAY or MAY not work i still have to test this
-        else
-            result = (void*)(v2 + 16 * (LUA_GLOBALSINDEX - a2 + 1));
-        break;
-    }
-    return result;//if your retarded and cant get the func then scan this SKID 8D 41 08 8B 49 38
-}
-
 
