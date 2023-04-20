@@ -26,7 +26,7 @@ int get_job_by_name(const std::string& job_name)
         if (*job_string == job_name)//check if the job matches
         {
             job_return = job_address;//return it with the address
-            break;
+            break;//if we find the joob
         }
 
         job_start += 8;
@@ -46,6 +46,8 @@ int get_script_context()
 int get_robloxstate()//get roblox state aka -> switch to lua state
 {
     uintptr_t script_context_address = get_script_context();
-    uintptr_t roblox_state_address = luastate(script_context_address);//pass down to lua state
+    int roblox_nothing = 0;//jump to default
+    //switched to getstate case default retarded autism skid ass
+    uintptr_t roblox_state_address = rbx_getstate(script_context_address, &roblox_nothing);//pass down to lua state
     return roblox_state_address;//return
 }
