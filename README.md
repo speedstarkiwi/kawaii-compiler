@@ -57,3 +57,7 @@ paste this include code on top of the `dllmain.cpp`
 # important(again)!
 
 stop asking us for addresses. if we dont want to provide, we **wont**. simply look up address tutorials.
+
+# edits
+
+4/20 - switched to `getstate` instead of lua state.
