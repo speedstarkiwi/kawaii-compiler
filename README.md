@@ -1,4 +1,4 @@
-# kawaii-compiler
+# kawaii-compiler [READ WARNING AT BOTTOM]
 
 This is an open source project aimed at `roblox` to achieve `luau` script execution without the need of updating *major* any compiler, OP codes, or offsets.
 
@@ -54,9 +54,9 @@ paste this include code on top of the `dllmain.cpp`
 #include "zstd/include/zstd.h"
 ```
 
-# important(again)!
+# important(BYFRON!)
 
-stop asking us for addresses. if we dont want to provide, we **wont**. simply look up address tutorials.
+So `byfron` was released. This encrypts everything. **Kawaii compiler** does not work as of right now. You will need a **BYFRON** bypass.
 
 # edits
 
